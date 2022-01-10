@@ -1,0 +1,75 @@
+{
+  // 解决 ts-node 找不到全局类型的问题，等价于 ts-node --files filename.ts
+  "ts-node": {
+    "files": true,
+    "transpileOnly": true,
+    "require": [ "typescript-transform-paths/register" ]
+  },
+  "compilerOptions": {
+//    "composite": true,
+    // target版本和node版本对照说明  https://github.com/microsoft/TypeScript/wiki/Node-Target-Mapping
+    "target": "ES2019",
+    /* 使用装饰器. */
+    "experimentalDecorators": true,
+    /* 生成装饰器的类型声明文件. */
+    "emitDecoratorMetadata": true,
+
+    /* Modules */
+    "module": "CommonJS",
+    /* Specify what module code is generated. */
+//     "rootDir": "./",                                  /* Specify the root folder within your source files. */
+    "rootDirs": [
+      "./src"
+    ],
+    "moduleResolution": "Node",
+    "allowJs": true,
+    /* Emit */
+    //    "noEmit": true,
+    //    "emitDeclarationOnly": true,
+    "declaration": true,
+    "outDir": "./dist",
+    "declarationDir": "./dist/types",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    /* Interop Constraints */
+    "isolatedModules": true,
+    /* Ensure that each file can be safely transpiled without relying on other imports. */
+    "esModuleInterop": true,
+    "strict": true,
+    /* Ensure overriding members in derived classes are marked with an override modifier. */
+    "noPropertyAccessFromIndexSignature": true,
+    /* Enforces using indexed accessors for keys declared using an indexed type */
+    "plugins": [
+      // Transform paths in output .js files
+      { "transform": "typescript-transform-paths" },
+
+      // Transform paths in output .d.ts files (Include this line if you output declarations files)
+      { "transform": "typescript-transform-paths", "afterDeclarations": true },
+      {
+        //        "after": true,
+        "transform": "../../src/index.ts"
+      }
+    ],
+    /* Completeness */
+    // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
+    "skipLibCheck": true,
+    /* Skip type checking all .d.ts files. */
+    // 给错误和消息设置样式，使用颜色和上下文。
+    "pretty": true,
+    "extendedDiagnostics": true
+  },
+  "include": [
+    "src/**/*"
+  ],
+  // 如果没有特殊指定， "exclude"默认情况下会排除node_modules，bower_components，jspm_packages和<outDir>目录。
+  // 当 include/exclude 有了指定的时候，仅用作排除 include 的结果
+  "exclude": [
+    "src/__tests__/**/*",
+    "**/*.test.ts",
+    "**/*.spec.ts"
+  ]
+}

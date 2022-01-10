@@ -1,0 +1,14 @@
+{
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		"isolatedModules": false
+	},
+	"include": [
+		"src/__tests__/**/*",
+		"**/*.test.ts",
+		"**/*.spec.ts"
+	],
+	// 如果没有特殊指定， "exclude"默认情况下会排除node_modules，bower_components，jspm_packages和<outDir>目录。
+	// 当 include/exclude 有了指定的时候，仅用作排除 include 的结果
+	"exclude": []
+}

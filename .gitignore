@@ -1,0 +1,7 @@
+miniprogram_npm
+node_modules
+.idea
+*.iml
+#dist
+#lib
+coverage
